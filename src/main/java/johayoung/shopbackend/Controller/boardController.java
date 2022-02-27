@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000") //react랑 REST
 @RestController //controller + responsebody : JSON형태로 객체 데이터 변환
@@ -23,11 +24,12 @@ public class boardController {
         return boardService.getAllboard();
     }
 
-    /*@GetMapping("/board/{idx}")
-    public board getboardById(@PathVariable int idx){ //@pathvariable
-
+    @GetMapping("/board/{idx}")
+    public Optional<board> getboardById(@PathVariable Integer idx){ //@pathvariable
+        // optional<T> T의 타입의 객체를 포장해주는 래퍼클래스  , 예상치 못한 nullpointerexception 예외 처리를 해줌
+        // 없는 데이터를 찾으려 할 경우 null값이 넘어옴 System.out.println(boardService.getboardById(idx)); = Optional.empty
         return boardService.getboardById(idx);
-    }*/
+    }
 
     @PostMapping("/board")
     public board createboard(@RequestBody board board){ //@requestbody
@@ -36,7 +38,9 @@ public class boardController {
     }
 
     @PutMapping("/board/{idx}")
-    public void updateboard(@PathVariable int idx,board updateboard){
+    public void updateboard(@PathVariable int idx,@RequestBody board updateboard){
+        //@Pathvariable url 주소에 있는 것 활용 가능
+        //@RequestBody Json 정보를 보낼 수 있는것
 
         boardService.updateboard(idx,updateboard);
     }

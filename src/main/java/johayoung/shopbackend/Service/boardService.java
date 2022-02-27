@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class boardService {
@@ -18,10 +19,10 @@ public class boardService {
     public List<board> getAllboard(){
         return boardRepository.findAll(); //MyBatis의 경우에는 Controller > Service > Impl > Dao > Mapper
     }
-    /*public board getboardById(int idx){
+    public Optional<board> getboardById(Integer idx){
 
         return boardRepository.findById(idx);
-    }*/
+    }
     public board createboard(board board){
 
         return boardRepository.save(board);
@@ -30,8 +31,15 @@ public class boardService {
     public void updateboard(int idx,board updateboard){
         board board = boardRepository.findById(idx)
                 .orElseThrow(() -> new ResourceNotFoundException("Not exist board Data by no : [" + idx + "]"));
-        updateboard.setTitle(updateboard.getTitle());
-        updateboard.setContent(updateboard.getContent());
+        System.out.println(updateboard.toString());
+
+        board.setTitle(updateboard.getTitle());
+        board.setContent(updateboard.getContent());
+        board.setCount(board.getCount());
+        board.setFilename(board.getFilename());
+        board.setWridate(board.getWridate());
+        board.setWriter(board.getWriter());
+
         boardRepository.save(board);
     }
 
