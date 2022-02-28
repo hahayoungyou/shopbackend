@@ -5,6 +5,7 @@ package johayoung.shopbackend.Controller;
 import johayoung.shopbackend.Service.boardService;
 import johayoung.shopbackend.entity.board;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,10 +19,12 @@ public class boardController {
     @Autowired
     private boardService boardService;
 
-    @GetMapping("/boardList") // RESTful post put get delete
-    public List<board> getAllboard(){
+    @GetMapping("/boardList") // RESTful post put get delete //boardList
+    public String getAllboard(Model model){
+        //List<board> b = boardService.getAllboard();
 
-        return boardService.getAllboard();
+        model.addAttribute("list",boardService.getAllboard()); //VO= value object 여러개의 속성들을 묶어서 특정값을 나타내는 객체
+        return "home"; //이것의 역할이 뭘까
     }
 
     @GetMapping("/board/{idx}")
