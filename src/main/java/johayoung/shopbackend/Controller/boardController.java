@@ -7,24 +7,27 @@ import johayoung.shopbackend.entity.board;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:3000") //react랑 REST
+//@CrossOrigin(origins = "http://localhost:3000") //react랑 REST
 @RestController //controller + responsebody : JSON형태로 객체 데이터 변환
-@RequestMapping("/api") //공통 url
+//@RequestMapping("/api") //공통 url
 public class boardController {
 
     @Autowired
     private boardService boardService;
 
-    @GetMapping("/boardList") // RESTful post put get delete //boardList
-    public String getAllboard(Model model){
-        //List<board> b = boardService.getAllboard();
+    @GetMapping("/") // RESTful post put get delete //boardList
+    public ModelAndView getAllboard(){ //Model model
+        List<board> b = boardService.getAllboard();
 
-        model.addAttribute("list",boardService.getAllboard()); //VO= value object 여러개의 속성들을 묶어서 특정값을 나타내는 객체
-        return "home"; //이것의 역할이 뭘까
+       // model.addAttribute("list",b); //VO= value object 여러개의 속성들을 묶어서 특정값을 나타내는 객체 , 데이터 추가
+        //System.out.println(b); //정상출력
+        return new ModelAndView("index", "list", b);// 이 방법을 활용하도록 하겠다.
+        //return "home.html"; // html 파일 이름
     }
 
     @GetMapping("/board/{idx}")
