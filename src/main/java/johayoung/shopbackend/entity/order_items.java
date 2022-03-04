@@ -14,6 +14,9 @@ import javax.persistence.*;
 @NoArgsConstructor//파라미터가 없는 기본 생성자 User user1 = new User();
 //@RequiredArgsConstructor //final이나 @NonNull인 필드 값만 파라미터로 받는 생성자 User user3 = new User(1L, "user3", "1234", null);
 public class order_items {
+    @Id
+    @Column(name = "id")
+    private String id;
 
     @Column(name = "order_id")
     private String order_id;
