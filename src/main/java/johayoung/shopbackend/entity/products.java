@@ -32,11 +32,14 @@ public class products {
     @Column(name = "explain")
     private String explain;
 
-    @Column(name = "status")
-    private String status;
+    @Column(name = "category")
+    private String category;
 
     @Column(name = "leftover")
     private int leftover;
+
+    @Column(name = "count")
+    private int count;
 
     @Column(name = "created_at")
     private String created_at;

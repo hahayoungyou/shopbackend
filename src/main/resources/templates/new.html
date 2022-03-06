@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="utf-8">
+<html xmlns:th="http://www.thymeleaf.org" lang="utf-8"  th:with="currentPage='new'">
 <head>
     <!-- meta data -->
     <meta charset="utf-8">
@@ -20,7 +20,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}">
 
-    <th:block th:include="fragments/header(id=3)"></th:block>
+    <th:block th:include="fragments/header"></th:block>
 </head>
 
 <body>
