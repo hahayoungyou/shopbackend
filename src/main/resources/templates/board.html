@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="utf-8"  th:with="currentPage='board'">
+<head>
+    <!-- meta data -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+    <title>JHY shopping mall</title>
+
+    <link rel="shortcut icon" type="image/icon" href="/logo/logo.png" /><!--/assets/logo/favicon.png-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/linearicons.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.theme.default.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootsnav.css}" >
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}">
+
+    <th:block th:include="fragments/header"></th:block>
+</head>
+
+<body>
+<section id="new-arrivals" class="new-arrivals">
+    <div class="container">
+        <br/>
+        <div class="section-header">
+            <h2>건의사항이나 자유게시판 - 미정 테스트중</h2>
+        </div><!--/.section-header-->
+        <br/>
+        <th:block layout:fragment="content">
+            <!--/* 검색 영역 */-->
+            <!--<div class="input-group" id="adv-search">
+                <select id="searchType" class="form-control" style="width: 100px;">
+                    <option value="">전체</option>
+                    <option value="title">제목</option>
+                    <option value="content">내용</option>
+                    <option value="writer">작성자</option>
+                </select>
+                <input type="text" id="searchKeyword" class="form-control" placeholder="키워드를 입력해 주세요." style="width: 300px;" />
+                <button type="button" class="btn btn-primary">
+                    <span aria-hidden="true">🔍</span>
+                </button>
+            </div>-->
+
+            <!--/* 게시글 영역 */-->
+            <div class="table-responsive clearfix">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>등록일</th>
+                        <th>조회 수</th>
+                    </tr>
+                    </thead>
+
+                    <!--/* 게시글 리스트 Rendering 영역 */-->
+                    <tbody id="list">
+                    <tr th:each="board : ${boards}">
+
+                        <td th:text="${board.title}"></td>
+                        <td th:text="${board.writer}"></td>
+                        <td th:text="${board.wridate}"></td>
+                        <td th:text="${board.count}"></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+                <div class="btn_wrap text-right">
+                    <a class="btn" style="background-color: #d58512; color:black" href="http://localhost:8080/boardNew">NEW</a>
+                </div>
+
+                <!-- 페이지네이션 Rendering 영역 -->
+
+            </div>
+            <div th:if="${totalPage != 0}" class="text-center">
+                <ul class="pagination">
+                    <li th:each="page : ${#numbers.sequence(0, totalPage - 1)}"> <!-- 단순반복처리 , 반복횟수만큼의 배열을 생성한뒤 th:each 에 넣어준다. 페이지 0번부터 시작해서 마지막에 -1 해줌 -->
+                        <a th:classappend="${pageStat.index == pageNo} ? on" th:href="@{/(page=${pageStat.index})}" th:text="${pageStat.index + 1}"></a>
+                        <!--  th:classappend="${pageStat.index == pageNo} ? on": 현재 페이지랑 같은 숫자면 on class th:href="@{/(page=${pageStat.index})}": 선택한 페이지로 넘어가게하는 a태그    th:text="${pageStat.index + 1} : 0부터 시작하니까 보이는 페이지는 +1 -->
+                    </li>
+                </ul>
+            </div>
+
+
+        <th:block layout:fragment="script">
+            <script th:inline="javascript">
+                /*<![CDATA[*/
+
+
+
+                /*]]>*/
+            </script>
+        </th:block>
+    </div><!--/.container-->
+
+</section><!--/.new-arrivals-->
+<!--new-arrivals end -->
+<th:block th:include="fragments/footer"></th:block>
+
+<script src="/js/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootsnav.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<script src="/js/custom.js"></script>
+
+</body>
+
+</html>

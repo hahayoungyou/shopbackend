@@ -5,6 +5,9 @@ import johayoung.shopbackend.Exception.ResourceNotFoundException;
 import johayoung.shopbackend.Repository.boardRepository;
 import johayoung.shopbackend.entity.board;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +19,13 @@ public class boardService {
     @Autowired
     private boardRepository boardRepository;
 
-    public List<board> getAllboard(){
-        return boardRepository.findAll(); //MyBatis의 경우에는 Controller > Service > Impl > Dao > Mapper
+    public Page<board> getAllboard(Pageable pageable){
+        return boardRepository.findAll(pageable); //MyBatis의 경우에는 Controller > Service > Impl > Dao > Mapper
     }
+
+
+
+
     public Optional<board> getboardById(Integer idx){
 
         return boardRepository.findById(idx);

@@ -109,9 +109,9 @@
                             <!--<li><a href="#" th:classappend="${currentPage == 'home'} ? 'active'">Home Page</a></li>-->
                             <li><a href="http://localhost:8080" th:styleappend="${currentPage == 'home'} ? 'color:#FF8C00'">home</a></li> <!--http://localhost:8080/new-->
                             <li><a href="http://localhost:8080/new" th:styleappend="${currentPage == 'new'} ? 'color:#FF8C00'">신상품</a></li>
-                            <li><a href="http://localhost:8080/list" th:styleappend="${currentPage == '?'} ? 'color:#FF8C00'">목록</a></li>
+                            <li><a href="http://localhost:8080/list" th:styleappend="${currentPage == 'list'} ? 'color:#FF8C00'">목록</a></li>
                             <!--<li class="scroll"><a href="#blog">blog</a></li>-->
-                            <li><a href="http://localhost:8080/board">건의사항</a></li>
+                            <li><a href="http://localhost:8080/board" th:styleappend="${currentPage == 'board'} ? 'color:#FF8C00'">건의사항</a></li>
                         </ul><!--/.nav -->
                     </div><!-- /.navbar-collapse -->
                 </div><!--/.container-->
