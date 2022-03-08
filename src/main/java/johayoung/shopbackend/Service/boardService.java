@@ -6,11 +6,9 @@ import johayoung.shopbackend.Repository.boardRepository;
 import johayoung.shopbackend.entity.board;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,7 +24,7 @@ public class boardService {
 
 
 
-    public Optional<board> getboardById(Integer idx){
+    public Optional<board> getboardById(Integer idx){ //Optional<
 
         return boardRepository.findById(idx);
     }

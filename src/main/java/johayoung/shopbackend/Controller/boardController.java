@@ -68,10 +68,18 @@ public class boardController {
       //return "home.html"; // html 파일 이름
   }
     @GetMapping("/board/{idx}")
-    public Optional<board> getboardById(@PathVariable Integer idx){ //@pathvariable
+    public ModelAndView getboardById(@PathVariable Integer idx){ //@pathvariable
         // optional<T> T의 타입의 객체를 포장해주는 래퍼클래스  , 예상치 못한 nullpointerexception 예외 처리를 해줌
         // 없는 데이터를 찾으려 할 경우 null값이 넘어옴 System.out.println(boardService.getboardById(idx)); = Optional.empty
-        return boardService.getboardById(idx);
+        Optional<board> b = boardService.getboardById(idx);
+        if(b.isPresent()){
+            board boards = b.get();
+            return new ModelAndView("boardDetail", "board", boards);// 이 방법을 활용하도록 하겠다.
+        }else{
+            System.out.println("error");
+            return new ModelAndView("boardNew", "list", "nothing");
+        }
+
     }
 
     @PostMapping("/board")

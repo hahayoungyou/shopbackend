@@ -26,29 +26,38 @@
 <body>
 <section id="new-arrivals" class="new-arrivals">
     <div class="container">
-        <br/>
-        <div class="section-header">
-            <h2>작성해주세요.</h2>
-        </div>
+
         <br/>
         <input type="hidden" name="writer" id="writer" value="user1">
-       <!-- <?$board_id=$_GET['board_id'];?>-->
-
+        <input type="hidden" name="idx" id="idx" value="${board.idx}">
+        <!-- <?$board_id=$_GET['board_id'];?>-->
 
         <div class="single-populer-products">
-            <form action="/newboard" method="post" enctype="multipart/form-data">
+
+
                 <table class="table table-hover"  >
                     <tbody>
-                    <tr><td>제목</td><td ></td></tr>
-                    <tr><td>내용</td><td></td></tr>
+                    <tr><td>제목</td><td th:text="${board.title}"></td></tr>
+                    <tr><td>내용</td><td th:text="${board.content}"></td>></tr>
+                    <tr><td>작성자</td><td th:text="${board.writer}"></td>></tr>
+                    <tr><td>작성 날짜</td><td th:text="${board.wridate}"></td>></tr>
                     <tr><td>첨부파일</td><td><input name="file" type="file" id="file"></td></tr>
 
                     </tbody>
                 </table>
-                <div class="btn_wrap text-right">
-                <input style="background-color: #d58512; color:black" type="submit" th:value="SAVE">
-                </div>
-            </form>
+                <div class="btn_wrap text-right">\
+
+                    <a class="btn" style="background-color: #d58512; color:black" th:href="@{'/post/edit/' + ${boardDto.id}}">
+                        <button>수정</button>
+                    </a>
+
+                    <form id="delete-form" th:action="@{'/post/' + ${boardDto.id}}" method="post">
+                        <input  type="hidden" name="_method" value="delete"/>
+                        <button  style="background-color: #d58512; color:black" id="delete-btn">삭제</button>
+                    </form>
+
+               </div>
+
         </div>
     </div>
 
