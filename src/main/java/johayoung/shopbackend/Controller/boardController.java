@@ -58,15 +58,38 @@ public class boardController {
         model.addAttribute("list", boardService.searchInfoList(pageable));
         return "/board";
     }*/
+
+    //수정이랑 등록이랑 합치고싶은데 마땅히 생각이 안나서 일단 분리
   @GetMapping("/boardNew") // RESTful post put get delete //boardList
   public ModelAndView boardNew(){ //Model model
       // List<board> b = boardService.getAllboard();
 
       // model.addAttribute("list",b); //VO= value object 여러개의 속성들을 묶어서 특정값을 나타내는 객체 , 데이터 추가
       //System.out.println(b); //정상출력
-      return new ModelAndView("boardNew", "list", "nothing");// 이 방법을 활용하도록 하겠다.
+      return new ModelAndView("boardNew", "list","nothing" );
+
+
       //return "home.html"; // html 파일 이름
   }
+    @GetMapping("/boardNew/{idx}") // RESTful post put get delete //boardList
+    public ModelAndView boardUpdate(@PathVariable Integer idx){ //Model model
+        // List<board> b = boardService.getAllboard();
+
+        // model.addAttribute("list",b); //VO= value object 여러개의 속성들을 묶어서 특정값을 나타내는 객체 , 데이터 추가
+        //System.out.println(b); //정상출력
+        Optional<board> b = boardService.getboardById(idx);
+        if(b.isPresent()) {
+            board boards = b.get();
+            return new ModelAndView("boardNew", "list",boards );
+        }else{
+            System.out.println("error");
+            return new ModelAndView("boardNew", "list", "nothing");
+        }
+
+
+
+        //return "home.html"; // html 파일 이름
+    }
     @GetMapping("/board/{idx}")
     public ModelAndView getboardById(@PathVariable Integer idx){ //@pathvariable
         // optional<T> T의 타입의 객체를 포장해주는 래퍼클래스  , 예상치 못한 nullpointerexception 예외 처리를 해줌
@@ -82,24 +105,29 @@ public class boardController {
 
     }
 
-    @PostMapping("/board")
-    public board createboard(@RequestBody board board){ //@requestbody
+    @PostMapping("/newboard")
+    public ModelAndView createboard(@ModelAttribute board board){ //@requestbody
+        board c= boardService.createboard(board);
 
-        return boardService.createboard(board);
+        return getboardById( c.getIdx());
     }
 
     @PutMapping("/board/{idx}")
-    public void updateboard(@PathVariable int idx,@RequestBody board updateboard){
+    public ModelAndView updateboard(@PathVariable int idx,@ModelAttribute board updateboard){
         //@Pathvariable url 주소에 있는 것 활용 가능
         //@RequestBody Json 정보를 보낼 수 있는것
 
         boardService.updateboard(idx,updateboard);
+
+        return getboardById(idx);
     }
 
     @DeleteMapping ("/board/{idx}")
-    public void deleteboard(@PathVariable int idx){
+    public ModelAndView deleteboard(@PathVariable int idx){
 
         boardService.deleteboard(idx);
+        String projectUrl = "redirect:http://www.naver.com";
+        return new ModelAndView("redirect:" + projectUrl);
     }
 
 

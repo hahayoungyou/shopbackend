@@ -45,14 +45,14 @@
 
                     </tbody>
                 </table>
-                <div class="btn_wrap text-right">\
+                <div class="btn_wrap text-right">
 
-                    <a class="btn" style="background-color: #d58512; color:black" th:href="@{'/post/edit/' + ${boardDto.id}}">
+                    <a class="btn" style="background-color: #d58512; color:black" th:href="@{'/boardNew/' + ${board.idx}}">
                         <button>수정</button>
                     </a>
-
-                    <form id="delete-form" th:action="@{'/post/' + ${boardDto.id}}" method="post">
-                        <input  type="hidden" name="_method" value="delete"/>
+<!--form을 통해 request 시 put과 delete는 지원하지 않아 아래 방법을 활용해야한다.-->
+                    <form id="delete-form" th:action="@{'/board/' + ${board.idx}}" method="post">
+                        <input  type="hidden" name="_method" value="DELETE"/>
                         <button  style="background-color: #d58512; color:black" id="delete-btn">삭제</button>
                     </form>
 
