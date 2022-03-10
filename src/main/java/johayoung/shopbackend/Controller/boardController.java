@@ -80,7 +80,7 @@ public class boardController {
         Optional<board> b = boardService.getboardById(idx);
         if(b.isPresent()) {
             board boards = b.get();
-            return new ModelAndView("boardNew", "list",boards );
+            return new ModelAndView("boardUpdate", "list",boards );
         }else{
             System.out.println("error");
             return new ModelAndView("boardNew", "list", "nothing");
@@ -113,6 +113,7 @@ public class boardController {
     }
 
     @PutMapping("/board/{idx}")
+   // @RequestMapping(value = {  "/board/{idx}" }, method = { RequestMethod.PUT, RequestMethod.PATCH })
     public ModelAndView updateboard(@PathVariable int idx,@ModelAttribute board updateboard){
         //@Pathvariable url 주소에 있는 것 활용 가능
         //@RequestBody Json 정보를 보낼 수 있는것
@@ -123,6 +124,7 @@ public class boardController {
     }
 
     @DeleteMapping ("/board/{idx}")
+   // @RequestMapping(value = {  "/board/{idx}" }, method = { RequestMethod.DELETE, RequestMethod.PATCH })
     public ModelAndView deleteboard(@PathVariable int idx){
 
         boardService.deleteboard(idx);
